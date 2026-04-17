@@ -10,6 +10,8 @@ export default function Home() {
       <button className="bg-white text-black px-6 py-3 rounded-xl font-semibold hover:scale-105 transition">
         Get Started
       </button>
+      <a href="/dashboard">Dashboard</a>
+<a href="/login">Login</a>
     </main>
   );
 }
