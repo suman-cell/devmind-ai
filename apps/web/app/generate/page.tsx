@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import Link from "next/link"
+import Navbar from "../../components/Navbar"
 
 export default function GeneratePage() {
   const [prompt, setPrompt] = useState("")
@@ -27,22 +27,21 @@ export default function GeneratePage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white p-6">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/" className="text-gray-500 hover:text-white text-sm mb-6 inline-block">← Back</Link>
+    <div className="min-h-screen bg-gray-950">
+      <Navbar />
+      <main className="max-w-3xl mx-auto px-6 py-10">
         <h1 className="text-3xl font-bold mb-2">Code Generator</h1>
         <p className="text-gray-400 mb-8">Describe what you want to build and get production-ready code.</p>
 
         <div className="bg-gray-900 border border-gray-800 rounded-2xl p-6 space-y-4">
           <div>
-            <label htmlFor="language-select" className="text-sm text-gray-400 mb-1 block">Language</label>
+            <label className="text-sm text-gray-400 mb-1 block">Language</label>
             <select
-              id="language-select"
               value={language}
               onChange={e => setLanguage(e.target.value)}
               className="bg-gray-800 border border-gray-700 rounded-lg px-3 py-2 text-sm w-full focus:outline-none focus:border-purple-500"
             >
-              {["TypeScript","JavaScript","Python","Go","Java","Rust"].map(l => (
+              {["TypeScript", "JavaScript", "Python", "Go", "Java", "Rust"].map(l => (
                 <option key={l}>{l}</option>
               ))}
             </select>
@@ -74,12 +73,14 @@ export default function GeneratePage() {
               <button
                 onClick={() => navigator.clipboard.writeText(output)}
                 className="text-xs text-purple-400 hover:text-purple-300"
-              >Copy</button>
+              >
+                Copy
+              </button>
             </div>
             <pre className="text-sm text-green-300 whitespace-pre-wrap overflow-x-auto">{output}</pre>
           </div>
         )}
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }

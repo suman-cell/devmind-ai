@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"
-import Link from "next/link"
+import Navbar from "../../components/Navbar"
 
 export default function DebugPage() {
   const [code, setCode] = useState("")
@@ -27,9 +27,9 @@ export default function DebugPage() {
   }
 
   return (
-    <main className="min-h-screen bg-gray-950 text-white p-6">
-      <div className="max-w-3xl mx-auto">
-        <Link href="/" className="text-gray-500 hover:text-white text-sm mb-6 inline-block">← Back</Link>
+    <div className="min-h-screen bg-gray-950">
+      <Navbar />
+      <main className="max-w-3xl mx-auto px-6 py-10">
         <h1 className="text-3xl font-bold mb-2">AI Debugger</h1>
         <p className="text-gray-400 mb-8">Paste your code and error — get the root cause and fix.</p>
 
@@ -43,6 +43,7 @@ export default function DebugPage() {
               className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-sm h-36 resize-none focus:outline-none focus:border-red-500 font-mono"
             />
           </div>
+
           <div>
             <label className="text-sm text-gray-400 mb-1 block">Error Message</label>
             <textarea
@@ -52,6 +53,7 @@ export default function DebugPage() {
               className="w-full bg-gray-800 border border-gray-700 rounded-lg p-3 text-sm h-24 resize-none focus:outline-none focus:border-red-500 font-mono"
             />
           </div>
+
           <button
             onClick={handleDebug}
             disabled={loading}
@@ -63,11 +65,19 @@ export default function DebugPage() {
 
         {output && (
           <div className="mt-6 bg-gray-900 border border-gray-800 rounded-2xl p-6">
-            <p className="text-sm text-gray-400 mb-3">Analysis & Fix</p>
-            <pre className="text-sm text-green-300 whitespace-pre-wrap">{output}</pre>
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-sm text-gray-400">Analysis & Fix</span>
+              <button
+                onClick={() => navigator.clipboard.writeText(output)}
+                className="text-xs text-red-400 hover:text-red-300"
+              >
+                Copy
+              </button>
+            </div>
+            <pre className="text-sm text-green-300 whitespace-pre-wrap font-mono">{output}</pre>
           </div>
         )}
-      </div>
-    </main>
+      </main>
+    </div>
   )
 }
